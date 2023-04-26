@@ -5,7 +5,7 @@ const Product = require("../model/productModel");
 
 describe("Product controller", () => {
   beforeAll(async () => {
-    await mongoose.connect("mongodb://localhost:27017/products-db", {
+    await mongoose.connect("", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
