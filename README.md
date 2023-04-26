@@ -55,21 +55,27 @@ npm test
 
 To use the project you need to run the backend and then the frontend. Once you run the frontend you will see the following page:
 
-![image](https://user-images.githubusercontent.com/54969894/134786845-9b8b7b0b-2b0b-4b0f-8b0a-9b0b8b0b0b0b.png)
+
 
 In this page you can see all the products that are in the database. You can create a new product by clicking on the button "Add Product" and you will see the following page:
 
-![image](https://user-images.githubusercontent.com/54969894/134786882-8b0b0b0b-0b0b-4b0b-8b0b-0b0b0b0b0b0b.png)
+<img width="1793" alt="viewAll" src="https://user-images.githubusercontent.com/113915529/234571101-e046b52c-d2f5-44aa-ac53-cfe40c6822a1.png">
+
 
 In this page you can create a new product by filling the form and clicking on the button "Create Product". You can also update a product by clicking on the button "Update" and you will see the following page:
 
-![image](https://user-images.githubusercontent.com/54969894/134786911-0b0b0b0b-0b0b-0b0b-8b0b-0b0b0b0b0b0b.png)
+<img width="1794" alt="addButton" src="https://user-images.githubusercontent.com/113915529/234571138-3383c920-c7aa-4f95-b0a7-b5a0d0c78284.png">
+
+
 
 In this page you can update the product by filling the form and clicking on the button "Update Product". Finally, you can delete a product by clicking on the button "Delete" and you will see the following page:
 
-![image](https://user-images.githubusercontent.com/54969894/134786933-0b0b0b0b-0b0b-0b0b-8b0b-0b0b0b0b0b0b.png)
+<img width="1781" alt="editPage" src="https://user-images.githubusercontent.com/113915529/234571173-2d9fbc0f-08fd-4d7a-a666-f124d87691d4.png">
 
-In this page you can delete the product by clicking on the button "Delete Product".
+
+In this page you can searcg the product by the name of the product 
+<img width="1786" alt="searchButton" src="https://user-images.githubusercontent.com/113915529/234571302-3c34db91-11c7-4349-94d9-130ddfaad7d4.png">
+
 
 ## Technologies and Features Used
 
