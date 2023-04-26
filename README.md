@@ -4,7 +4,7 @@
 
 This project is a web application that allows you to create, read, update and delete products. The project was developed using React, Node.js, Express and MongoDB.
 
-I used the given API " https://fakestoreapi.com/products " to get the products and I created a backend to store the products in a database. The backend has the following routes:
+I used the given API ` " https://dummyjson.com/products " `to get the products and I created a backend to store the products in a database. The backend has the following routes:
 `"products /"`, `"products /: id"`, `"products /: id / update"` and `"products /: id / delete"`.
 
 - The first route is used to get all the products, the second one is used to get a product by id, the third one is used to update a product by id and the last one is used to delete a product by id.
