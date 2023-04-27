@@ -5,11 +5,15 @@ const axios = require("axios");
 const connectDatabase = require("./database");
 const router = require("./routes/product-routes");
 const Product = require("./model/productModel");
+const path = require("path");
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, "../product-store/build")));
 
 app.use("/products", router); // localhost:localhost:3001/products
 
@@ -34,6 +38,11 @@ async function fetchAndStoreProducts() {
 
 connectDatabase().then(() => {
   fetchAndStoreProducts();
+});
+
+// Catch-all route to handle all other requests and return the index.html file
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../product-store/build", "index.html"));
 });
 
 app.listen(PORT, () => {
