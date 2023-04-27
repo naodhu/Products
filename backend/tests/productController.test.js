@@ -1,93 +1,86 @@
 const request = require("supertest");
-const mongoose = require("mongoose");
-const app = require("../app");
+const express = require("express");
+const productRoutes = require("../routes/product-routes");
 const Product = require("../model/productModel");
 
-describe("Product controller", () => {
-  beforeAll(async () => {
-    await mongoose.connect("", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
+const app = express();
+app.use(express.json());
+app.use("/products", productRoutes);
+
+jest.mock("../model/productModel");
+
+// Mock the mongoose model methods
+describe("Product Controller", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  // Test the controller methods here using the mocked model methods
+  // ... your tests here
+  // this is the test for the get all products method.
+  test("should get all products", async () => {
+    const products = [{ _id: "1", title: "Product 1" }];
+    Product.find.mockResolvedValue(products);
+
+    const response = await request(app).get("/products");
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({ products });
+  });
+
+  // this is the test for the get product by ID method.
+  test("should get product by ID", async () => {
+    const product = { _id: "1", title: "Product 1" };
+    Product.findById.mockResolvedValue(product);
+
+    const response = await request(app).get("/products/1");
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({ product });
+  });
+
+  // this is the test for the add product method.
+  test("should add a product", async () => {
+    const newProduct = {
+      title: "Product 1",
+      description: "Test description",
+      // other fields here...
+    };
+    const savedProduct = { _id: "1", ...newProduct };
+    Product.prototype.save.mockResolvedValue(savedProduct);
+    Product.findById.mockResolvedValue(savedProduct);
+
+    const response = await request(app).post("/products").send(newProduct);
+    expect(response.statusCode).toBe(201);
+    expect(response.body).toEqual({ product: savedProduct });
+  });
+
+  // this is the test for the update product method.
+  test("should update a product", async () => {
+    const updatedProduct = {
+      _id: "1",
+      title: "Updated Product 1",
+      description: "Updated description",
+      // other fields here...
+    };
+    Product.findByIdAndUpdate.mockResolvedValue(updatedProduct);
+
+    const response = await request(app).put("/products/1").send(updatedProduct);
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({
+      message: "Product updated successfully",
+      product: updatedProduct,
     });
   });
 
-  afterAll(async () => {
-    await mongoose.disconnect();
-  });
-
-  afterEach(async () => {
-    await Product.deleteMany({});
-  });
-
-  const sampleProduct = {
-    title: "Test product",
-    description: "Test description",
-    price: 100,
-    discountPercentage: 10,
-    rating: 4.5,
-    stock: 50,
-    brand: "Test Brand",
-    category: "Test Category",
-    thumbnail: "https://example.com/thumbnail.jpg",
-    images: [
-      "https://example.com/image1.jpg",
-      "https://example.com/image2.jpg",
-    ],
-  };
-
-  test("should get all products", async () => {
-    const res = await request(app).get("/products");
-    expect(res.status).toBe(200);
-    expect(res.body).toHaveProperty("products");
-  });
-
-  test("should get a product by id", async () => {
-    const product = new Product(sampleProduct);
-    await product.save();
-
-    const res = await request(app).get(`/products/${product._id}`);
-
-    expect(res.status).toBe(200);
-    expect(res.body).toHaveProperty("product");
-    expect(res.body.product._id).toEqual(product._id.toString());
-  });
-
-  test("should add a new product", async () => {
-    const res = await request(app).post("/products").send(sampleProduct);
-
-    expect(res.status).toBe(201);
-    expect(res.body).toHaveProperty("product");
-    expect(res.body.product.title).toEqual(sampleProduct.title);
-  });
-
-  test("should update a product", async () => {
-    const product = new Product(sampleProduct);
-    await product.save();
-
-    const updatedProduct = {
-      ...sampleProduct,
-      title: "Updated product",
-    };
-
-    const res = await request(app)
-      .put(`/products/${product._id}`)
-      .send(updatedProduct);
-
-    expect(res.status).toBe(200);
-    expect(res.body).toHaveProperty("product");
-    expect(res.body.product.title).toEqual("Updated product");
-  });
-
+  // this is the test for the delete product method.
   test("should delete a product", async () => {
-    const product = new Product(sampleProduct);
-    await product.save();
+    const deletedProduct = { _id: "1", title: "Product 1" };
+    Product.findByIdAndRemove.mockResolvedValue(deletedProduct);
 
-    const res = await request(app).delete(`/products/${product._id}`);
-
-    expect(res.status).toBe(200);
-    expect(res.body).toHaveProperty("message", "Product deleted");
-    expect(res.body).toHaveProperty("product");
-    expect(res.body.product._id).toEqual(product._id.toString());
+    const response = await request(app).delete("/products/1");
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({
+      message: "Product deleted",
+      product: deletedProduct,
+    });
   });
 });
