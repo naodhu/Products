@@ -7,16 +7,16 @@ const app = express();
 app.use(express.json());
 app.use("/products", productRoutes);
 
+// jest.mock is used to mock the module
 jest.mock("../model/productModel");
 
-// Mock the mongoose model methods
+// this code is used for mocking the model methods
 describe("Product Controller", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   // Test the controller methods here using the mocked model methods
-  // ... your tests here
   // this is the test for the get all products method.
   test("should get all products", async () => {
     const products = [{ _id: "1", title: "Product 1" }];
@@ -42,7 +42,6 @@ describe("Product Controller", () => {
     const newProduct = {
       title: "Product 1",
       description: "Test description",
-      // other fields here...
     };
     const savedProduct = { _id: "1", ...newProduct };
     Product.prototype.save.mockResolvedValue(savedProduct);
@@ -59,7 +58,6 @@ describe("Product Controller", () => {
       _id: "1",
       title: "Updated Product 1",
       description: "Updated description",
-      // other fields here...
     };
     Product.findByIdAndUpdate.mockResolvedValue(updatedProduct);
 
