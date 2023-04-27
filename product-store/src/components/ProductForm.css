@@ -1,18 +1,47 @@
 .product-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 16px;
-    box-sizing: border-box;
-  }
-  
-  TextField {
-    margin-bottom: 16px;
-  }
-  
-  Button {
-    align-self: flex-start;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+TextField {
+  margin-bottom: 16px;
+}
+
+Button {
+  align-self: flex-start;
+}
+
+.product-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.product-paper {
+  padding: 32px;
+  border-radius: 16px;
+}
+
+.product-title {
+  margin-bottom: 24px;
+}
+
+.product-introduction {
+  margin-bottom: 16px;
+}
+
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+

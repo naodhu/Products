@@ -127,3 +127,31 @@ li {
 .add-to-cart-button svg {
   margin-right: 8px;
 }
+
+.product-detail-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+}
+
+.product-detail-paper {
+  padding: 32px;
+  border-radius: 16px;
+}
+
+.product-detail-title {
+  margin-bottom: 24px;
+}
+
+.product-detail-introduction {
+  margin-bottom: 16px;
+}
+
+.product-detail-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
